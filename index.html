@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi tienda</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background: #080808;
+      color: #ffffff;
+      padding: 30px 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* ==============================
+       ENCABEZADO
+    ================================ */
+
+    h1 {
+      color: #8cff00;
+      font-size: 44px;
+      margin: 10px 0 5px;
+
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      text-shadow: 0 0 15px rgba(140, 255, 0, 0.45);
+    }
+
+    .slogan {
+      color: #ffffff;
+      font-size: 21px;
+      margin: 5px 0 10px;
+    }
+
+    .propietario {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .propietario strong {
+      color: #8cff00;
+    }
+
+
+    /* ==============================
+       BENEFICIOS
+    ================================ */
+
+    .beneficios {
+      max-width: 1100px;
+
+      margin: 0 auto 35px;
+
+      padding: 15px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      gap: 15px;
+
+      flex-wrap: wrap;
+
+      background: #151515;
+
+      border: 1px solid #292929;
+
+      border-left: 4px solid #8cff00;
+
+      border-radius: 8px;
+
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .beneficios span {
+      color: #ddd;
+      font-size: 14px;
+
+      padding: 5px 12px;
+    }
+
+
+    /* ==============================
+       PRESENTACIÓN
+    ================================ */
+
+    .presentacion {
+      max-width: 850px;
+
+      margin: 0 auto 40px;
+    }
+
+    .presentacion h2 {
+      color: #8cff00;
+
+      font-size: 28px;
+
+      margin-bottom: 10px;
+    }
+
+    .presentacion p {
+      color: #aaa;
+
+      line-height: 1.6;
+
+      margin: 0;
+    }
+
+
+    /* ==============================
+       CATÁLOGO
+    ================================ */
+
+    #productos {
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 22px;
+    }
+
+
+    /* ==============================
+       PRODUCTOS
+    ================================ */
+
+    .producto {
+      width: 250px;
+
+      padding: 15px;
+
+      background: #151515;
+
+      border: 1px solid #292929;
+
+      border-radius: 12px;
+
+      transition: all 0.25s ease;
+    }
+
+    .producto:hover {
+      transform: translateY(-7px);
+
+      border-color: #8cff00;
+
+      box-shadow:
+        0 10px 30px rgba(140, 255, 0, 0.12);
+    }
+
+    .producto img {
+      width: 100%;
+
+      height: 170px;
+
+      object-fit: contain;
+
+      background: #0d0d0d;
+
+      border-radius: 8px;
+
+      display: block;
+    }
+
+    .producto h3 {
+      color: #ffffff;
+
+      font-size: 18px;
+
+      min-height: 45px;
+
+      margin: 15px 0 8px;
+    }
+
+    .descripcion {
+      color: #999;
+
+      font-size: 14px;
+
+      line-height: 1.4;
+
+      min-height: 58px;
+    }
+
+    .precio {
+      color: #8cff00;
+
+      font-size: 21px;
+
+      font-weight: bold;
+
+      margin: 15px 0;
+    }
+
+
+    /* ==============================
+       BOTÓN PRODUCTO
+    ================================ */
+
+    .producto button {
+      width: 100%;
+
+      padding: 11px;
+
+      border: none;
+
+      border-radius: 6px;
+
+      background: #8cff00;
+
+      color: #080808;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .producto button:hover {
+      background: #b5ff66;
+
+      transform: scale(1.02);
+    }
+
+
+    /* ==============================
+       CARRITO
+    ================================ */
+
+    .carrito {
+      max-width: 650px;
+
+      margin: 50px auto 0;
+
+      padding: 25px;
+
+      background: #151515;
+
+      border: 1px solid #292929;
+
+      border-top: 3px solid #8cff00;
+
+      border-radius: 12px;
+
+      text-align: left;
+
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+
+      color: #8cff00;
+    }
+
+    #lista-carrito {
+      padding-left: 20px;
+    }
+
+    #lista-carrito li {
+      color: #ddd;
+
+      margin-bottom: 10px;
+    }
+
+    .resumen {
+      border-top: 1px solid #333;
+
+      margin-top: 20px;
+
+      padding-top: 10px;
+
+      color: #ccc;
+    }
+
+    .total {
+      color: #8cff00;
+
+      font-size: 22px;
+
+      font-weight: bold;
+    }
+
+
+    /* ==============================
+       BOTONES CARRITO
+    ================================ */
+
+    .vaciar,
+    .finalizar {
+      padding: 11px 15px;
+
+      border: none;
+
+      border-radius: 6px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+      margin-top: 10px;
+    }
+
+    .vaciar {
+      background: #dc3545;
+
+      color: white;
+    }
+
+    .finalizar {
+      background: #8cff00;
+
+      color: #080808;
+
+      margin-left: 5px;
+    }
+
+    .vaciar:hover,
+    .finalizar:hover {
+      opacity: 0.85;
+    }
+
+
+    /* ==============================
+       FOOTER
+    ================================ */
+
+    footer {
+      margin-top: 55px;
+
+      padding: 25px;
+
+      border-top: 1px solid #292929;
+
+      color: #666;
+
+      font-size: 13px;
+    }
+
+    footer p:first-child {
+      color: #8cff00;
+
+      font-weight: bold;
+
+      font-size: 15px;
+    }
+
+
+    /* ==============================
+       RESPONSIVE
+    ================================ */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 20px 10px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .slogan {
+        font-size: 18px;
+      }
+
+      .producto {
+        width: 100%;
+
+        max-width: 320px;
+      }
+
+      .carrito {
+        width: 100%;
+      }
+
+      .finalizar {
+        margin-left: 0;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <!DOCTYPE html>
+  <html lang="es">
+
+  <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sanwolk's - Tienda Gamer</title>
+
+    <!-- Conectar CSS -->
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+
+    <h1>🎮 Sanwolk's</h1>
+
+    <p class="slogan">
+      Tu próxima partida empieza aquí.
+    </p>
+
+    <p class="propietario">
+      Una tienda gamer creada por
+      <strong>Santiago Jaramillo</strong>
+    </p>
+
+
+    <div class="beneficios">
+
+      <span>🚚 Envíos a todo Colombia</span>
+
+      <span>🔒 Compra segura</span>
+
+      <span>🎮 Productos gaming</span>
+
+      <span>⚡ Entrega rápida</span>
+
+    </div>
+
+
+    <div class="presentacion">
+
+      <h2>🔥 Encuentra tu próxima consola</h2>
+
+      <p>
+        En Sanwolk's encontrarás consolas y accesorios para disfrutar
+        tus videojuegos favoritos. Nuestra tienda está pensada para
+        jóvenes gamers, estudiantes, coleccionistas y cualquier persona
+        que quiera llevar su experiencia de juego al siguiente nivel.
+      </p>
+
+    </div>
+
+
+    <!-- Productos generados por JavaScript -->
+
+    <div id="productos"></div>
+
+
+    <!-- Carrito -->
+
+    <div class="carrito">
+
+      <h2>🛒 Carrito de Compras (0)</h2>
+
+      <ul id="lista-carrito"></ul>
+
+      <div class="resumen">
+
+        <p>
+          Envío: <strong>Gratis</strong>
+        </p>
+
+        <p class="total">
+          Total: $<span id="total">0</span>
+        </p>
+
+      </div>
+
+
+      <button
+        class="vaciar"
+        id="btn-vaciar">
+
+        🗑️ Vaciar Carrito
+
+      </button>
+
+
+      <button
+        class="finalizar"
+        id="btn-finalizar">
+
+        ✅ Finalizar Compra
+
+      </button>
+
+    </div>
+
+
+    <footer>
+
+      <p>
+        🎮 Sanwolk's — Tu próxima partida empieza aquí.
+      </p>
+
+      <p>
+        © 2026 Santiago Jaramillo
+      </p>
+
+    </footer>
+
+
+    <!-- Conectar JavaScript -->
+    <script src="script.js"></script>
+
+  </body>
+
+  </html>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "Xbox Series X 1TB Digital",
+        descripcion:
+          "La potencia de nueva generación para disfrutar tus juegos favoritos.",
+        precio: 2499000,
+        imagen:
+          "https://www.presse-citron.net/app/uploads/2020/09/xbox-series-x-precommande-1024x682.jpg"
+      },
+
+      {
+        id: 2,
+        nombre: "PlayStation 5 Slim Digital",
+        descripcion:
+          "Gráficos increíbles y una experiencia gaming de nueva generación.",
+        precio: 2399000,
+        imagen:
+          "https://bol.images.contentstack.eu/v3/assets/bltf814e9f78be52b93/bltbc7424c4b309bac2/65b380878a28cb040a0b945f/BOL_PS5-Slimx2.png?auto=webp&crop=1%3A1&environment=blt0fb12aeb38c76113&format=pjpg&locale=nl-nl&quality=80&width=640"
+      },
+
+      {
+        id: 3,
+        nombre: "Nintendo Switch OLED",
+        descripcion:
+          "Juega en casa o donde quieras con su espectacular pantalla OLED.",
+        precio: 1499000,
+        imagen:
+          "https://cdn.mos.cms.futurecdn.net/jJkUehV9Emwry3PYsS8T8S-1200-80.png"
+      },
+
+      {
+        id: 4,
+        nombre: "Xbox Series S 512GB",
+        descripcion:
+          "Compacta, potente y perfecta para comenzar en la nueva generación.",
+        precio: 1399000,
+        imagen:
+          "https://static.papergeek.fr/2020/09/xbox-series-s.jpg"
+      },
+
+      {
+        id: 5,
+        nombre: "PlayStation 5 Pro",
+        descripcion:
+          "Mayor rendimiento, gráficos mejorados y una experiencia premium.",
+        precio: 3499000,
+        imagen:
+          "https://s.zst.com.br/cms-assets/2024/09/ps5-pro-promo-1-.webp"
+      },
+
+      {
+        id: 6,
+        nombre: "Nintendo Switch 2",
+        descripcion:
+          "La nueva generación de Nintendo para jugar donde quieras.",
+        precio: 2199000,
+        imagen:
+          "https://newworld.co.za/cdn/shop/files/NIN5.webp?v=1762520824"
+      },
+
+      {
+        id: 7,
+        nombre: "Control Inalámbrico Xbox",
+        descripcion:
+          "Precisión, comodidad y control inalámbrico para tus partidas.",
+        precio: 299000,
+        imagen:
+          "https://down-th.img.susercontent.com/file/th-11134207-81ztj-mf3sielgo170a7"
+      }
+    ];
+
+    const carrito = [];
+
+    const contenedorProductos = document.getElementById("productos");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+    const botonVaciar = document.getElementById("btn-vaciar");
+    const botonFinalizar = document.getElementById("btn-finalizar");
+
+
+    /* ================================
+       MOSTRAR PRODUCTOS
+    ================================ */
+
+    function mostrarProductos() {
+
+      contenedorProductos.innerHTML = "";
+
+      productos.forEach(prod => {
+
+        const div = document.createElement("div");
+
+        div.className = "producto";
+
+        div.innerHTML = `
+          <img 
+            src="${prod.imagen}" 
+            alt="${prod.nombre}"
+            loading="lazy"
+          >
+
+          <h3>${prod.nombre}</h3>
+
+          <p class="descripcion">
+            ${prod.descripcion}
+          </p>
+
+          <p class="precio">
+            ${prod.precio.toLocaleString("es-CO", {
+              style: "currency",
+              currency: "COP",
+              minimumFractionDigits: 0
+            })}
+          </p>
+
+          <button onclick="agregarAlCarrito(${prod.id})">
+            🛒 Agregar al carrito
+          </button>
+        `;
+
+        contenedorProductos.appendChild(div);
+
+      });
+
+    }
+
+
+    /* ================================
+       AGREGAR AL CARRITO
+    ================================ */
+
+    function agregarAlCarrito(id) {
+
+      const productoExistente =
+        carrito.find(p => p.id === id);
+
+      if (productoExistente) {
+
+        productoExistente.cantidad++;
+
+      } else {
+
+        const producto =
+          productos.find(p => p.id === id);
+
+        carrito.push({
+          ...producto,
+          cantidad: 1
+        });
+
+      }
+
+      actualizarCarrito();
+    }
+
+
+    /* ================================
+       ACTUALIZAR CARRITO
+    ================================ */
+
+    function actualizarCarrito() {
+
+      listaCarrito.innerHTML = "";
+
+      let total = 0;
+      let totalItems = 0;
+
+      carrito.forEach(item => {
+
+        const li = document.createElement("li");
+
+        const subtotal =
+          item.precio * item.cantidad;
+
+        li.textContent =
+          `${item.nombre} x${item.cantidad} — ` +
+          subtotal.toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+          });
+
+        listaCarrito.appendChild(li);
+
+        total += subtotal;
+        totalItems += item.cantidad;
+
+      });
+
+      totalCarrito.textContent =
+        total.toLocaleString("es-CO");
+
+      actualizarTituloCarrito(totalItems);
+    }
+
+
+    /* ================================
+       TÍTULO DEL CARRITO
+    ================================ */
+
+    function actualizarTituloCarrito(cantidad) {
+
+      const titulo =
+        document.querySelector(".carrito h2");
+
+      titulo.textContent =
+        `🛒 Carrito de Compras (${cantidad})`;
+    }
+
+
+    /* ================================
+       VACIAR CARRITO
+    ================================ */
+
+    function vaciarCarrito() {
+
+      if (carrito.length === 0) {
+
+        alert("🛒 El carrito ya está vacío.");
+
+        return;
+      }
+
+      if (
+        confirm(
+          "¿Estás seguro de que quieres vaciar el carrito?"
+        )
+      ) {
+
+        carrito.length = 0;
+
+        actualizarCarrito();
+      }
+    }
+
+
+    /* ================================
+       FINALIZAR COMPRA
+    ================================ */
+
+    function finalizarCompra() {
+
+      if (carrito.length === 0) {
+
+        alert(
+          "🛒 Tu carrito está vacío. " +
+          "Agrega productos antes de finalizar la compra."
+        );
+
+        return;
+      }
+
+      alert(
+        "🎉 ¡Pedido simulado confirmado!\n\n" +
+        "Gracias por comprar en Sanwolk's.\n\n" +
+        "Tu próxima partida empieza aquí. 🎮"
+      );
+
+      carrito.length = 0;
+
+      actualizarCarrito();
+    }
+
+
+    /* ================================
+       BOTONES
+    ================================ */
+
+    botonVaciar.addEventListener(
+      "click",
+      vaciarCarrito
+    );
+
+    botonFinalizar.addEventListener(
+      "click",
+      finalizarCompra
+    );
+
+
+    /* ================================
+       INICIAR TIENDA
+    ================================ */
+
+    mostrarProductos();
+  </script>
+</body>
+</html>
